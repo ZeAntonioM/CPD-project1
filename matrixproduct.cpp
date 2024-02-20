@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <time.h>
 #include <cstdlib>
-#include <papi.h>
+//#include <papi.h>
 
 using namespace std;
 
@@ -71,7 +71,7 @@ void OnMult(int m_ar, int m_br)
 	
 	
 }
-
+/*
 // add code here for line x line matriz multiplication
 void OnMultLine(int m_ar, int m_br)
 {
@@ -107,7 +107,7 @@ void init_papi() {
             << " REVISION: " << PAPI_VERSION_REVISION(retval) << "\n";
 }
 
-
+*/
 int main (int argc, char *argv[])
 {
 
@@ -115,11 +115,12 @@ int main (int argc, char *argv[])
 	int lin, col, blockSize;
 	int op;
 	
-	int EventSet = PAPI_NULL;
+	//int EventSet = PAPI_NULL;
   	long long values[2];
   	int ret;
 	
-
+    OnMult(5,5);
+    /*
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
 	if ( ret != PAPI_VER_CURRENT )
 		std::cout << "FAIL" << endl;
@@ -195,4 +196,5 @@ int main (int argc, char *argv[])
 	if ( ret != PAPI_OK )
 		std::cout << "FAIL destroy" << endl;
 
+    */
 }
