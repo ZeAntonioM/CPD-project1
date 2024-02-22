@@ -1,9 +1,10 @@
 use std::cmp::min;
 
 fn main() {
-    let m_ar = 5;
-    let m_br = 5;
-    on_mult(m_ar, m_br);
+    let matrix_size = 6;
+    let block_size = 2;
+    on_mult(matrix_size, matrix_size);
+    block_mult(matrix_size, block_size);
 }
 
 fn on_mult(m_ar: usize, m_br: usize) {
@@ -32,4 +33,51 @@ fn on_mult(m_ar: usize, m_br: usize) {
         print!("{} ", phc[i]);
     }
     println!();
+}
+
+
+fn block_mult(matrix_size: usize, block_size: usize) {
+
+    if matrix_size % block_size != 0{
+        println!("ERROR: Matrix is undivisible by the block size");
+        return;
+    }
+
+    let pha = vec![1.0; matrix_size*matrix_size];
+    let mut phb = vec![0.0; matrix_size*matrix_size];
+    let mut phc = vec![0.0; matrix_size*matrix_size];
+
+    for i in 0..matrix_size{
+        for j in 0..matrix_size{
+            phb[i*matrix_size + j] = i as f64 + 1.0;
+        }
+    }
+    
+    // divide matrixes into square matrixes until we get all blocks of 2x2 matrixes
+    // then do internal mult, then
+
+    // MOVE BLOCKS AROUND
+    for block_i in (0..matrix_size).step_by(block_size) {
+        for block_k in (0..matrix_size).step_by(block_size) {
+            for block_j in (0..matrix_size).step_by(block_size) {
+
+                // CALCULATE INSIDE EACH BLOCK MATRIX
+                for i in block_i..(block_i + block_size) {
+                    for k in block_k..(block_k + block_size) {
+                        for j in block_j..(block_j + block_size) {
+                            phc[i*matrix_size + j] += pha[i*matrix_size + k] * phb[k*matrix_size + j];
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    // result
+    for i in 0..min(10,matrix_size) {
+        print!("{} ", phc[i]);
+    }
+    println!();
+
 }
