@@ -2,48 +2,79 @@ use std::cmp::min;
 use std::time::{Instant};
 
 fn main() {
-    let matrix_size = 6;
-    let block_size = 2;
-    on_mult(matrix_size, matrix_size);
+    let matrix_size = 256;
+    let block_size = 8;
+    on_mult(matrix_size);
+    line_mult(matrix_size);
     block_mult(matrix_size, block_size);
 }
 
-fn on_mult(m_ar: usize, m_br: usize) {
+fn on_mult(matrix_size: usize){
 
-    
+    let pha = vec![1.0; matrix_size*matrix_size];
+    let mut phb = vec![0.0; matrix_size*matrix_size];
+    let mut phc = vec![0.0; matrix_size*matrix_size];
 
-    let pha = vec![1.0; m_ar*m_ar];
-    let mut phb = vec![0.0; m_br*m_br];
-    let mut phc = vec![0.0; m_ar*m_br];
-
-    for i in 0..m_br {
-        for j in 0..m_br {
-            phb[i*m_br + j] = i as f64 + 1.0;
+    for i in 0..matrix_size {
+        for j in 0..matrix_size {
+            phb[i*matrix_size + j] = i as f64 + 1.0;
         }
     }
 
     let start = Instant::now();
 
-    for i in 0..m_ar {
-        for j in 0..m_br {
+    for i in 0..matrix_size {
+        for j in 0..matrix_size {
             let mut temp = 0.0;
-            for k in 0..m_ar{
-                temp += pha[i*m_ar + k] * phb[k*m_br+j];
+            for k in 0..matrix_size{
+                temp += pha[i*matrix_size + k] * phb[k*matrix_size+j];
             }
-            phc[i*m_ar+j] = temp;
+            phc[i*matrix_size+j] = temp;
         }
     }
 
     let elapsed = Instant::now() - start;
 
     // result
-    for i in 0..min(10,m_br) {
+    for i in 0..min(10,matrix_size) {
         print!("{} ", phc[i]);
     }
     println!();
     println!("Elapsed time: {} seconds and {} milliseconds", elapsed.as_secs(), elapsed.as_millis());
+    println!();
 }
 
+fn line_mult(matrix_size: usize){
+    
+    let pha = vec![1.0; matrix_size*matrix_size];
+    let mut phb = vec![0.0; matrix_size*matrix_size];
+    let mut phc = vec![0.0; matrix_size*matrix_size];
+
+    for i in 0..matrix_size {
+        for j in 0..matrix_size {
+            phb[i*matrix_size + j] = i as f64 + 1.0;
+        }
+    }
+    let start = Instant::now();
+
+    for i in 0..matrix_size {
+        for k in 0..matrix_size {
+            for j in 0..matrix_size {
+                phc[i*matrix_size + j] += pha[i*matrix_size + k] * phb[k*matrix_size + j];
+            }
+        }
+    }
+
+    let elapsed = Instant::now() - start;
+    // result
+    for i in 0..min(10,matrix_size) {
+        print!("{} ", phc[i]);
+    }
+    println!();
+    println!("Elapsed time: {} seconds and {} milliseconds", elapsed.as_secs(), elapsed.as_millis());
+    println!();
+
+}
 
 fn block_mult(matrix_size: usize, block_size: usize) {
 
@@ -62,6 +93,7 @@ fn block_mult(matrix_size: usize, block_size: usize) {
         }
     }
     
+    let start = Instant::now();
     // divide matrixes into square matrixes until we get all blocks of 2x2 matrixes
     // then do internal mult, then
 
@@ -83,10 +115,13 @@ fn block_mult(matrix_size: usize, block_size: usize) {
         }
     }
 
+    let elapsed = Instant::now() - start;
     // result
     for i in 0..min(10,matrix_size) {
         print!("{} ", phc[i]);
     }
+    println!();
+    println!("Elapsed time: {} seconds and {} milliseconds", elapsed.as_secs(), elapsed.as_millis());
     println!();
 
 }
