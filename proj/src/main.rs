@@ -2,16 +2,10 @@ use std::cmp::min;
 use std::time::{Instant};
 
 fn main() {
-<<<<<<< HEAD
     let matrix_size = 6;
     let block_size = 2;
     on_mult(matrix_size, matrix_size);
     block_mult(matrix_size, block_size);
-=======
-    let m_ar = 600;
-    let m_br = 600;
-    on_mult(m_ar, m_br);
->>>>>>> 46230db3e1161877fa64ae00dc2ff86f72ab7474
 }
 
 fn on_mult(m_ar: usize, m_br: usize) {
