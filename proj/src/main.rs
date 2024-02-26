@@ -1,8 +1,8 @@
 use std::cmp::min;
-use std::time::{Instant};
+use std::time::Instant;
 
 fn main() {
-    let matrix_size = 256;
+    let matrix_size = 3000;
     let block_size = 8;
     on_mult(matrix_size);
     line_mult(matrix_size);

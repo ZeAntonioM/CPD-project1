@@ -119,7 +119,7 @@ int main (int argc, char *argv[])
   	long long values[2];
   	int ret;
 	
-    OnMult(5,5);
+    OnMult(1400,1400);
     /*
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
 	if ( ret != PAPI_VER_CURRENT )
@@ -197,4 +197,5 @@ int main (int argc, char *argv[])
 		std::cout << "FAIL destroy" << endl;
 
     */
+   return 0;
 }
