@@ -1,9 +1,22 @@
 use std::cmp::min;
 use std::time::Instant;
+use std::io;
 
 fn main() {
-    let matrix_size = 3000;
-    let block_size = 4;
+    println!("Input the size for the square matrix: ");
+    let mut matrix_size = String::new();
+    io::stdin().read_line(&mut matrix_size).unwrap();
+    let matrix_size: usize = matrix_size.trim().parse().expect("Please type a number!");    
+
+
+    println!("Input the size for the block matrix for the block multiplication algorithm: ");
+    let mut block_size = String::new();
+    io::stdin().read_line(&mut block_size).unwrap();
+    let block_size: usize = block_size.trim().parse().expect("Please type a number!");    
+
+    println!();
+    println!("Calculating...");
+    println!();
     on_mult(matrix_size);
     line_mult(matrix_size);
     block_mult(matrix_size, block_size);
