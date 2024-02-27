@@ -3,7 +3,7 @@ use std::time::Instant;
 
 fn main() {
     let matrix_size = 3000;
-    let block_size = 8;
+    let block_size = 4;
     on_mult(matrix_size);
     line_mult(matrix_size);
     block_mult(matrix_size, block_size);
@@ -79,7 +79,7 @@ fn line_mult(matrix_size: usize){
 fn block_mult(matrix_size: usize, block_size: usize) {
 
     if matrix_size % block_size != 0{
-        println!("ERROR: Matrix is undivisible by the block size");
+        println!("ERROR: Matrix isn't divisible by the block size");
         return;
     }
 
