@@ -238,11 +238,22 @@ int main (int argc, char *argv[])
 	//int EventSet = PAPI_NULL;
   	long long values[2];
   	int ret;
-	
-    OnMult(1400,1400);
-	OnMultLine(1400,1400);
 
-	OnMultBlock(1400,1400,4);
+	int matrix_size;
+	int block_size;
+	
+	cout << "Please input a size for the square matrix: ";
+	cin >> matrix_size;
+	cout << "Thank you! Now input a size for the blocks on the block matrix multiplication: ";
+	cin >> block_size;
+	cout << "Thank you again!" << endl << endl;
+	cout << "Calculating... \n\n" << endl; 
+
+
+    OnMult(matrix_size, matrix_size);
+	OnMultLine(matrix_size, matrix_size);
+
+	OnMultBlock(matrix_size, matrix_size, block_size);
     /*
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
 	if ( ret != PAPI_VER_CURRENT )
