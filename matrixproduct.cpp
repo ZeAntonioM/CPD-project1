@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <time.h>
 #include <cstdlib>
-//#include <papi.h>
+#include <papi.h>
 
 using namespace std;
 
@@ -207,7 +207,7 @@ void OnMultBlock(int m_ar, int m_br, int bkSize)
 }
 
 
-/*
+
 void handle_error (int retval)
 {
   printf("PAPI error %d: %s\n", retval, PAPI_strerror(retval));
@@ -227,7 +227,6 @@ void init_papi() {
             << " REVISION: " << PAPI_VERSION_REVISION(retval) << "\n";
 }
 
-*/
 int main (int argc, char *argv[])
 {
 
@@ -249,12 +248,6 @@ int main (int argc, char *argv[])
 	cout << "Thank you again!" << endl << endl;
 	cout << "Calculating... \n\n" << endl; 
 
-
-    OnMult(matrix_size, matrix_size);
-	OnMultLine(matrix_size, matrix_size);
-
-	OnMultBlock(matrix_size, matrix_size, block_size);
-    /*
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
 	if ( ret != PAPI_VER_CURRENT )
 		std::cout << "FAIL" << endl;
@@ -330,6 +323,6 @@ int main (int argc, char *argv[])
 	if ( ret != PAPI_OK )
 		std::cout << "FAIL destroy" << endl;
 
-    */
+    
    return 0;
 }
